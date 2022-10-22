@@ -12,10 +12,12 @@ const fetcher = function(url, localPath) {
     // Print the error if one occurred
     if (error !== null) {
       console.log('error:', error);
+      return;
     }
     // Print the response status code if not 200
     if (response.statusCode !== 200) {
       console.log('statusCode:', response && response.statusCode);
+      return;
     }
     
     fs.writeFile(localPath, body, () => {  // write file to localPath
