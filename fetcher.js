@@ -1,11 +1,13 @@
 const request = require('request');
 const fs = require('fs');
 
+// Extract arguments from CLI
 const url = process.argv[2];
 const localPath = process.argv[3];
 
+// FUNCTION
+// fetcher: downloads and saves resource at argument url and saves at argument local file path
 const fetcher = function(url, localPath) {
-  
   request(url, (error, response, body) => {
     // Print the error if one occurred
     if (error !== null) {
@@ -16,7 +18,7 @@ const fetcher = function(url, localPath) {
       console.log('statusCode:', response && response.statusCode);
     }
     
-    fs.writeFile(localPath, body, () => {
+    fs.writeFile(localPath, body, () => {  // write file to localPath
       const fileStats = fs.statSync(localPath);
       const size = fileStats.size;
       console.log(`Successfully downloaded and saved ${size} bytes to ${localPath}`);
